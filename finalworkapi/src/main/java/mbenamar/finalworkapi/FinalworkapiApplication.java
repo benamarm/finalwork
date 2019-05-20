@@ -2,9 +2,10 @@ package mbenamar.finalworkapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class FinalworkapiApplication {
+public class FinalworkapiApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(FinalworkapiApplication.class, args);
