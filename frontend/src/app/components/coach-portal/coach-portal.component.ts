@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {APIService} from '../../services/api.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-coach-portal',
@@ -10,15 +11,15 @@ export class CoachPortalComponent implements OnInit {
     coachToken: string;
     errorMessage: string;
 
-    constructor(private API: APIService) {
+    constructor(private API: APIService, private router: Router) {
     }
 
     ngOnInit() {
         if (localStorage.getItem('adminToken')) {
-            window.location.href = '/users';
+            this.router.navigate(['users']);
         }
         if (localStorage.getItem('userToken')) {
-            window.location.href = '/mySessions';
+            this.router.navigate(['mySessions']);
         }
     }
 
@@ -36,7 +37,7 @@ export class CoachPortalComponent implements OnInit {
         this.API.coachLogin(coachToken).subscribe(token => {
             if (token) {
                 localStorage.setItem('adminToken', token);
-                window.location.href = '/users';
+                this.router.navigate(['users']);
             } else {
                 this.errorMessage = 'Ingegeven token is onbestaand.';
             }

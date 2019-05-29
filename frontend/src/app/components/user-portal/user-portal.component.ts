@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {APIService} from '../../services/api.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-user-portal',
@@ -11,15 +12,15 @@ export class UserPortalComponent implements OnInit {
     password: string;
     errorMessage: string;
 
-    constructor(private API: APIService) {
+    constructor(private API: APIService, private router: Router) {
     }
 
     ngOnInit() {
         if (localStorage.getItem('adminToken')) {
-            window.location.href = '/users';
+            this.router.navigate(['users']);
         }
         if (localStorage.getItem('userToken')) {
-            window.location.href = '/mySessions';
+            this.router.navigate(['mySessions']);
         }
     }
 
@@ -43,7 +44,7 @@ export class UserPortalComponent implements OnInit {
         this.API.userLogin(loginRequest).subscribe(user => {
             localStorage.setItem('userToken', user.token);
             localStorage.setItem('userId', user.username);
-            window.location.href = '/mySessions';
+            this.router.navigate(['mySessions']);
         }, e => {
             this.errorMessage = 'Gebruikersnaam of wachtwoord onjuist.';
         });

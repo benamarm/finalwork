@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/User';
 import { APIService } from '../../services/api.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -11,12 +12,12 @@ export class UsersComponent implements OnInit {
 
   users: User[];
 
-  constructor(private API: APIService) { }
+  constructor(private API: APIService, private router: Router) { }
 
   ngOnInit() {
 
     if (!localStorage.getItem('adminToken')) {
-      window.location.href = '/coachPortal';
+      this.router.navigate(['coachPortal']);
       return;
     }
 
@@ -33,7 +34,7 @@ export class UsersComponent implements OnInit {
 
   onLogOut() {
     localStorage.removeItem('adminToken');
-    window.location.href = '/coachPortal';
+    this.router.navigate(['coachPortal']);
   }
 
 }

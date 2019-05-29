@@ -2,7 +2,7 @@ import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef
 import {User} from '../../models/User';
 import {Session} from '../../models/Session';
 import {APIService} from '../../services/api.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SessionDetailsComponent} from '../session-details/session-details.component';
 
 @Component({
@@ -17,12 +17,12 @@ export class MySessionsComponent implements OnInit {
     noSessions: string;
     @ViewChild('sessionDetails', {read: ViewContainerRef}) entry: ViewContainerRef;
 
-    constructor(private API: APIService, private route: ActivatedRoute, private resolver: ComponentFactoryResolver) {
+    constructor(private API: APIService, private route: ActivatedRoute, private resolver: ComponentFactoryResolver, private router: Router) {
     }
 
     ngOnInit() {
         if (!localStorage.getItem('userToken')) {
-            window.location.href = '/userPortal';
+            this.router.navigate(['userPortal']);
         }
         this.API.getUser(localStorage.getItem('userId')).subscribe(user => {
                 this.user = user;
@@ -38,7 +38,7 @@ export class MySessionsComponent implements OnInit {
     onLogOut() {
         localStorage.removeItem('userToken');
         localStorage.removeItem('userId');
-        window.location.href = '/userPortal';
+        this.router.navigate(['userPortal']);
     }
 
     filterDesc<T>(prop: string, array: T[]) {

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ViewContainerRef, ComponentFactory, ComponentRef, ComponentFactoryResolver} from '@angular/core';
 import {APIService} from '../../services/api.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../models/User';
 import {Session} from '../../models/Session';
 import {SessionDetailsComponent} from '../session-details/session-details.component';
@@ -21,12 +21,12 @@ export class UserDetailsComponent implements OnInit {
     noSessions: string;
     @ViewChild('sessionDetails', {read: ViewContainerRef}) entry: ViewContainerRef;
 
-    constructor(private API: APIService, private route: ActivatedRoute, private resolver: ComponentFactoryResolver) {
+    constructor(private API: APIService, private route: ActivatedRoute, private resolver: ComponentFactoryResolver, private router: Router) {
     }
 
     ngOnInit() {
         if (!localStorage.getItem('adminToken')) {
-            window.location.href = '/coachPortal';
+            this.router.navigate(['coachPortal']);
             return;
         }
 
@@ -46,18 +46,18 @@ export class UserDetailsComponent implements OnInit {
                 });
             },
             error => {
-                window.location.href = '/users';
+                this.router.navigate(['users']);
             });
 
     }
 
     onBack() {
-        window.location.href = '/users';
+        this.router.navigate(['users']);
     }
 
     onLogOut() {
         localStorage.removeItem('adminToken');
-        window.location.href = '/coachPortal';
+        this.router.navigate(['coachPortal']);
     }
 
     onSaveNote() {
