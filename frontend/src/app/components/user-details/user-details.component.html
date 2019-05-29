@@ -1,0 +1,47 @@
+<div>
+    <button (click)="onLogOut()" class="navButton">Uitloggen</button>
+    <button (click)="onBack()" class="navButton">Terug</button>
+    <div class="container solo">
+        <h2>Gegevens</h2>
+        <p><b>Naam:</b> {{user.firstName + ' ' + user.lastName}}</p>
+        <p><b>Gebruikersnaam:</b> {{user.username}}</p>
+        <p><b>Account aangemaakt:</b> {{user.creationDate | date}}</p>
+        <p><b>Notities:</b></p>
+        <form (ngSubmit)="onSaveNote()">
+            <textarea name="note" [(ngModel)]="note"></textarea><br/>
+            <input type="submit" value="Bewaren" class="saveButton"/>
+        </form>
+        <p [ngClass]="noteSaved">{{noteSaved}}</p>
+    </div>
+    <div>
+        <div class="container duo">
+            <h2>Toonveranderingen</h2>
+            <table>
+                <tr>
+                    <th>Datum</th>
+                    <th>Oud toonbereik</th>
+                    <th>Nieuw toonbereik</th>
+                    <th>Type</th>
+                </tr>
+                <tr app-freq-change-item *ngFor="let freqChange of freqChanges" [freqChange]="freqChange"></tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <div class="container duo">
+            <h2>Sessies</h2>
+            <table>
+                <tr>
+                    <th>Datum</th>
+                    <th>Score</th>
+                    <th>Details</th>
+                </tr>
+                <tr [innerHTML]="noSessions"></tr>
+                <tr app-session-item *ngFor="let session of sessions" [session]="session"
+                    (someEvent)="showSessionDetails($event)">
+                </tr>
+            </table>
+        </div>
+        <template #sessionDetails></template>
+    </div>
+</div>

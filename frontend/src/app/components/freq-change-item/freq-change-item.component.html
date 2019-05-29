@@ -1,0 +1,5 @@
+<td>{{freqChange.changeDate | date: 'medium'}}</td>
+<td *ngIf="freqChange.oldMinFreq">{{(freqChange.oldMinFreq | number: '1.2-2') + '-' + (freqChange.oldMaxFreq | number: '1.2-2') + ' Hz'}}</td>
+<td *ngIf="!freqChange.oldMinFreq"></td>
+<td>{{(freqChange.newMinFreq | number: '1.2-2') + '-' + (freqChange.newMaxFreq | number: '1.2-2') + ' Hz'}}</td>
+<td>{{freqChange.type}}</td>

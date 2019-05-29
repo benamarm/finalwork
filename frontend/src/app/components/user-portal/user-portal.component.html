@@ -1,0 +1,11 @@
+<div>
+  <img class="logo" src="../../../assets/ParrotLogo.png" />
+  <form (ngSubmit)="onSubmit()">
+    <label><b>Gebruikersnaam: </b></label><br/>
+    <input type="text" name="username" [(ngModel)]="username" /><br/>
+    <label><b>Wachtwoord: </b></label><br/>
+    <input type="password" name="password" [(ngModel)]="password" /><br/>
+    <input type="submit" value="Inloggen"/>
+  </form>
+  <p class="error" [ngClass]="errorMessage">{{errorMessage}}</p>
+</div>

@@ -1,0 +1,17 @@
+<div>
+    <button (click)="onLogOut()" class="navButton">Uitloggen</button>
+    <div class="container duo">
+        <h1>Gebruikers</h1>
+        <table>
+            <tr>
+                <th>Gebruikersnaam</th>
+                <th>Naam</th>
+                <th>Laatst gespeeld</th>
+                <th>Account aangemaakt</th>
+                <th></th>
+            </tr>
+            <tr app-user-item *ngFor="let user of users" [user]="user">
+            </tr>
+        </table>
+    </div>
+</div>

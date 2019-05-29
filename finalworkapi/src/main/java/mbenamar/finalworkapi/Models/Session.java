@@ -1,8 +1,6 @@
 package mbenamar.finalworkapi.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -20,8 +18,14 @@ public class Session {
     private Float maxFreq;
     private Integer score;
     private Date startTime;
+    @Column(columnDefinition = "TEXT")
+    private String feedback;
+    private boolean feedbackSeen;
     @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<SessionStep> sessionSteps = new HashSet<>();
+    @JsonIgnore
+    @OneToOne(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private SessionAudio sessionAudio;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
@@ -85,5 +89,29 @@ public class Session {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public SessionAudio getSessionAudio() {
+        return sessionAudio;
+    }
+
+    public void setSessionAudio(SessionAudio sessionAudio) {
+        this.sessionAudio = sessionAudio;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public boolean isFeedbackSeen() {
+        return feedbackSeen;
+    }
+
+    public void setFeedbackSeen(boolean feedbackSeen) {
+        this.feedbackSeen = feedbackSeen;
     }
 }

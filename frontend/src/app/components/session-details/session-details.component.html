@@ -1,0 +1,20 @@
+<div class="container duo">
+
+  <div id="chartContainer" style="height: 300px; min-width: 600px"></div>
+
+  <audio controls="controls" id="audio">
+    <source id="source" src="" type="audio/wav" />
+  </audio>
+
+  <p><b>Datum: </b> {{session.startTime | date: 'medium'}}</p>
+  <p *ngIf="isCoach()"><b>Toonbereik:</b> {{(session.minFreq | number: '1.2-2') + '-' + (session.maxFreq | number: '1.2-2') + ' Hz'}}</p>
+  <p><b>Score:</b> {{session.score}}</p>
+
+  <p><b>Feedback:</b> <span *ngIf="!isCoach()"><br/>{{session.feedback ? session.feedback : 'Geen feedback beschikbaar.'}}</span></p>
+  <form (ngSubmit)="onSaveFeedback()" *ngIf="isCoach()">
+    <textarea name="note" [(ngModel)]="feedback"></textarea><br/>
+    <input type="submit" value="Bewaren" class="saveButton"/>
+  </form>
+  <p *ngIf="isCoach()" [ngClass]="feedbackSaved">{{feedbackSaved}}</p>
+
+</div>

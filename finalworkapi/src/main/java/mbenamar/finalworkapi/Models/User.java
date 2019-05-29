@@ -20,6 +20,8 @@ public class User {
     private String password;
     @Column(unique = true)
     private String token;
+    @Column(columnDefinition = "TEXT")
+    private String note;
     @CreationTimestamp
     private Date creationDate;
     @JsonIgnore
@@ -97,4 +99,11 @@ public class User {
         this.freqChanges = freqChanges;
     }
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 }

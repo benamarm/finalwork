@@ -1,0 +1,3 @@
+<td><mat-icon matTooltip="Er is nieuwe feedback beschikbaar voor deze sessie." *ngIf="isUser() && !session.feedbackSeen">new_releases</mat-icon> {{session.startTime | date: 'medium'}}</td>
+<td>{{session.score}}</td>
+<td><button (click)="callParent()">Bekijk</button> </td>

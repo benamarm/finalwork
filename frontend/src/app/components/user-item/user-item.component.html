@@ -1,0 +1,5 @@
+  <td>{{user.username}}</td>
+  <td>{{user.firstName + ' ' + user.lastName}}</td>
+  <td>{{ !user.lastPlayed ? 'Nog niet gespeeld.' : user.lastPlayed | date: 'medium' }}</td>
+  <td>{{user.creationDate | date }}</td>
+  <td><button routerLink="/userDetails/{{user.username}}">Bekijk</button></td>

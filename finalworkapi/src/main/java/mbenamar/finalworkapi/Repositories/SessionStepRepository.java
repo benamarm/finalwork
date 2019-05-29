@@ -4,5 +4,5 @@ import mbenamar.finalworkapi.Models.SessionStep;
 import org.springframework.data.repository.CrudRepository;
 
 public interface SessionStepRepository extends CrudRepository<SessionStep, Long> {
-    Iterable<SessionStep> findSessionStepBySessionIdEquals(Long id);
+    Iterable<SessionStep> findSessionStepsBySessionIdEquals(Long id);
 }

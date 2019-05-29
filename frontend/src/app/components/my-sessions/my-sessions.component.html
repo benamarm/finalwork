@@ -1,0 +1,26 @@
+<div>
+    <button (click)="onLogOut()" class="navButton">Uitloggen</button>
+    <div class="container solo">
+        <h2>Mijn gegevens</h2>
+        <p><b>Naam:</b> {{user.firstName + ' ' + user.lastName}}</p>
+        <p><b>Gebruikersnaam:</b> {{user.username}}</p>
+        <p><b>Account aangemaakt:</b> {{user.creationDate | date}}</p>
+    </div>
+    <div>
+        <div class="container duo">
+            <h2>Mijn sessies</h2>
+            <table>
+                <tr>
+                    <th>Datum</th>
+                    <th>Score</th>
+                    <th>Details</th>
+                </tr>
+                <tr [innerHTML]="noSessions"></tr>
+                <tr app-session-item *ngFor="let session of sessions" [session]="session"
+                    (someEvent)="showSessionDetails($event)">
+                </tr>
+            </table>
+        </div>
+        <template #sessionDetails></template>
+    </div>
+</div>
